@@ -83,6 +83,6 @@ class CollectionReference:
         return docs
 
     def stream(self, transaction=None) -> Iterable[DocumentSnapshot]:
-        for key in sorted(get_by_path(self._data, self._path)):
+        for key in sorted({str(k):v for k,v in get_by_path(self._data, self._path).items()}):
             doc_snapshot = self.document(key).get()
             yield doc_snapshot
