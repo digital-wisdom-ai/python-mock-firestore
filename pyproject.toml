@@ -1,0 +1,46 @@
+[build-system]
+requires = ["setuptools>=42", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "mock-firestore"
+version = "0.12.0"
+description = "A mocked version of the Google Cloud Firestore library"
+authors = [{ name = "Matt Dowds" }]
+license = { text = "MIT" }
+readme = "README.md"
+requires-python = ">=3.9"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+dependencies = ["google-cloud-firestore", "pytest>=8.3.5"]
+
+[project.optional-dependencies]
+dev = ["google-cloud-firestore", "pytest", "black", "isort", "mypy", "flake8"]
+
+[project.urls]
+"Homepage" = "https://github.com/mdowds/mock-firestore"
+"Bug Tracker" = "https://github.com/mdowds/mock-firestore/issues"
+
+[tool.black]
+line-length = 88
+target-version = ["py39"]
+
+[tool.isort]
+profile = "black"
+line_length = 88
+
+[tool.mypy]
+python_version = "3.9"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
+disallow_incomplete_defs = true
+
+[dependency-groups]
+dev = ["pytest>=8.3.5"]
