@@ -14,7 +14,7 @@ jobs:
     steps:
       - name: PR Agent action step
         id: pragent
-        uses: qodo-ai/pr-agent@v0.26
+        uses: qodo-ai/pr-agent@v0.27
         with:
           args: '/improve --pr_code_suggestions.commitable_code_suggestions=true'
         env:
