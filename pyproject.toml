@@ -18,7 +18,7 @@ classifiers = [
     "License :: OSI Approved :: MIT License",
     "Operating System :: OS Independent",
 ]
-dependencies = ["google-cloud-firestore", "pytest>=8.3.5"]
+dependencies = ["google-cloud-firestore"]
 
 [project.optional-dependencies]
 dev = ["google-cloud-firestore", "pytest", "black", "isort", "mypy", "flake8"]

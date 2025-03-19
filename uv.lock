@@ -371,7 +371,6 @@ version = "0.12.0"
 source = { editable = "." }
 dependencies = [
     { name = "google-cloud-firestore" },
-    { name = "pytest" },
 ]
 
 [package.optional-dependencies]
@@ -397,7 +396,6 @@ requires-dist = [
     { name = "google-cloud-firestore", marker = "extra == 'dev'" },
     { name = "isort", marker = "extra == 'dev'" },
     { name = "mypy", marker = "extra == 'dev'" },
-    { name = "pytest", specifier = ">=8.3.5" },
     { name = "pytest", marker = "extra == 'dev'" },
 ]
 
