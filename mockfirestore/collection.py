@@ -3,7 +3,7 @@ from typing import Any, List, Optional, Iterable, Dict, Tuple, Sequence, Union
 
 from mockfirestore import AlreadyExists
 from mockfirestore._helpers import generate_random_string, Store, get_by_path, set_by_path, Timestamp
-from mockfirestore.query import Query
+from mockfirestore.query import Query, FieldFilter
 from mockfirestore.document import DocumentReference, DocumentSnapshot
 
 
@@ -41,9 +41,10 @@ class CollectionReference:
         timestamp = Timestamp.from_now()
         return timestamp, doc_ref
 
-    def where(self, field: str, op: str, value: Any) -> Query:
-        query = Query(self, field_filters=[(field, op, value)])
-        return query
+    def where(self, field: str = None, op: str = None, value: Any = None, *, filter: FieldFilter = None) -> Query:
+        if filter is not None:
+            return Query(self, field_filters=[(filter.field, filter.op, filter.value)])
+        return Query(self, field_filters=[(field, op, value)])
 
     def order_by(self, key: str, direction: Optional[str] = None) -> Query:
         query = Query(self, orders=[(key, direction)])

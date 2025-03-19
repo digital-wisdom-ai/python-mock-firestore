@@ -1,9 +1,21 @@
 import warnings
 from itertools import islice, tee
 from typing import Iterator, Any, Optional, List, Callable, Union
+from dataclasses import dataclass
 
 from mockfirestore.document import DocumentSnapshot
 from mockfirestore._helpers import T
+
+@dataclass
+class FieldFilter:
+    field: str
+    op: str
+    value: Any
+
+    def __init__(self, field: str, op: str, value: Any):
+        self.field = field
+        self.op = op
+        self.value = value
 
 
 class Query:
@@ -61,8 +73,11 @@ class Query:
         compare = self._compare_func(op)
         self._field_filters.append((field, compare, value))
 
-    def where(self, field: str, op: str, value: Any) -> 'Query':
-        self._add_field_filter(field, op, value)
+    def where(self, field: str = None, op: str = None, value: Any = None, *, filter: FieldFilter = None) -> 'Query':
+        if filter is not None:
+            self._add_field_filter(filter.field, filter.op, filter.value)
+        else:
+            self._add_field_filter(field, op, value)
         return self
 
     def order_by(self, key: str, direction: Optional[str] = 'ASCENDING') -> 'Query':
