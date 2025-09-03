@@ -52,7 +52,7 @@ class TestDocumentReference(TestCase):
         fs = MockFirestore()
         fs._data = {'foo': {}}
         doc = fs.collection('foo').document('bar').get().to_dict()
-        self.assertEqual({}, doc)
+        self.assertIsNone(doc)
 
     def test_get_nestedDocument(self):
         fs = MockFirestore()
